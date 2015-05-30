@@ -57,7 +57,7 @@
 \newcommand*\LetterCopyCode{%
   \put(0.5\paperwidth,-0.5\paperheight){%
     \makebox(0,0)[c]{\resizebox{\textwidth}{!}{%
-      \rotatebox{45}{\textsf{\textbf{\color{lightgray}\usekomavar*{copy}}}}}}%
+      \rotatebox{45}{\textsf{\textbf{\color{lightgray}\strut\usekomavar*{copy}}}}}}%
   }%
 }
 
