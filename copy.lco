@@ -13,13 +13,12 @@
 %% This work has the LPPL maintenance status "author-maintained".
 
 \ProvidesFile{copy.lco}[%
-  2015/05/30 v0.1d copy letter-class-option (RN)]
+  2015/05/31 v0.1d copy letter-class-option (RN)]
 
 \RequirePackage{atbegshi,picture,xcolor,graphicx}
 \RequirePackage{etex}
 
 \newcounter{copy@pages}
-\newsavebox\save@outbox
 
 \AtBeginLetter{\shipout@copy}
 \AtEndDocument{\shipout@copy}
@@ -35,7 +34,7 @@
     \advance\c@page\@ne
     \@latex@info@no@line{Shipout copy of page \the\c@page}%
     \setbox\AtBeginShipoutBox=\box\csname out@box\the\c@page\endcsname
-    \AtBeginShipoutUpperLeft{\LetterCopyCode}%
+    \AtBeginShipoutUpperLeft{\LetterCopyMarker}%
     \AtBeginShipoutOriginalShipout\box\AtBeginShipoutBox
   \repeat
   \c@copy@pages=\z@
@@ -54,10 +53,10 @@
   \global\c@copy@pages=\c@page
 }
 
-\newcommand*\LetterCopyCode{%
+\newcommand*\LetterCopyMarker{%
   \put(0.5\paperwidth,-0.5\paperheight){%
-    \makebox(0,0)[c]{\resizebox{\textwidth}{!}{%
-      \rotatebox{45}{\textsf{\textbf{\color{lightgray}\strut\usekomavar*{copy}}}}}}%
+    \makebox(0,0)[c]{\resizebox{\textwidth}{!}{\rotatebox{45}{%
+      \textsf{\textbf{\color{lightgray}\strut\usekomavar*{copy}}}}}}%
   }%
 }
 
@@ -73,4 +72,3 @@
 \defcaptionname{polish}\copyname{Kopia}%
 
 \endinput
-
