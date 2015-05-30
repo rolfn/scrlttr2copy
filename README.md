@@ -3,7 +3,7 @@ A letter class option file for automatically creation of copies.
 
 The file `copy.lco` provides the new class option »copy« for the LaTeX letter
 document class »scrlttr2«. If the option »copy« is given all pages of a
-specific letter are duplicated with background text marking these copies.
+specific letter are duplicated with background text marking as copies.
 
 For more details see the example document `letter-copy-test.tex`.
 
