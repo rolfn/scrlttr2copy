@@ -49,8 +49,8 @@
   }{%
     \@latex@info@no@line{Savebox for page \the\c@page\space already exist}%
   }%
-  \global\expandafter\setbox\csname out@box\the\c@page\endcsname=%
-    \copy\AtBeginShipoutBox
+  \@latex@info@no@line{Save page \the\c@page}%
+  \global\setbox\csname out@box\the\c@page\endcsname=\copy\AtBeginShipoutBox
   \global\c@copy@pages=\c@page
 }
 
