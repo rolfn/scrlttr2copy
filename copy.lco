@@ -13,7 +13,7 @@
 %% This work has the LPPL maintenance status "author-maintained".
 
 \ProvidesFile{copy.lco}[%
-  2015/05/28 v0.1c copy letter-class-option (RN)]
+  2015/05/30 v0.1d copy letter-class-option (RN)]
 
 \RequirePackage{atbegshi,picture,xcolor,graphicx}
 \RequirePackage{etex}
@@ -68,6 +68,9 @@
   english,newzealand,UKenglish,USenglish}\copyname{Copy}%
 \defcaptionname{german,ngerman,austrian,naustrian,%
   swissgerman,nswissgerman}\copyname{Kopie}%
+\defcaptionname{acadian,canadien,francais,french}\copyname{Copie}%
+\defcaptionname{spanish,italian}\copyname{Copia}%
+\defcaptionname{polish}\copyname{Kopia}%
 
 \endinput
 
