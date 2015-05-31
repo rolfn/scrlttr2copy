@@ -28,17 +28,17 @@
     \@latex@info@no@line{Shipout an empty page}%
     \AtBeginShipoutOriginalShipout\null
   \fi\fi
-  \@tempcntb=\c@page
-  \c@page=\z@
-  \loop\ifnum\c@page<\c@copy@pages
-    \advance\c@page\@ne
-    \@latex@info@no@line{Shipout copy of page \the\c@page}%
-    \setbox\AtBeginShipoutBox=\box\csname out@box\the\c@page\endcsname
-    \AtBeginShipoutUpperLeft{\LetterCopyMarker}%
-    \AtBeginShipoutOriginalShipout\box\AtBeginShipoutBox
-  \repeat
+  \begingroup
+    \c@page=\z@
+    \loop\ifnum\c@page<\c@copy@pages
+      \advance\c@page\@ne
+      \@latex@info@no@line{Shipout copy of page \the\c@page}%
+      \setbox\AtBeginShipoutBox=\box\csname out@box\the\c@page\endcsname
+      \AtBeginShipoutUpperLeft{\LetterCopyMarker}%
+      \AtBeginShipoutOriginalShipout\box\AtBeginShipoutBox
+    \repeat
+  \endgroup
   \c@copy@pages=\z@
-  \c@page=\@tempcntb
 }
 
 \AtBeginShipout{%
