@@ -1,4 +1,4 @@
-# scrlttr_copy
+# scrlttr2copy
 A letter class option file for automatically creation of copies.
 
 The file `copy.lco` provides the new class option »copy« for the LaTeX letter
