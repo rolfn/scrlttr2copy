@@ -66,9 +66,10 @@
 \defcaptionname{american,australian,british,canadian,%
   english,newzealand,UKenglish,USenglish}\copyname{Copy}%
 \defcaptionname{german,ngerman,austrian,naustrian,%
-  swissgerman,nswissgerman}\copyname{Kopie}%
-\defcaptionname{acadian,canadien,francais,french}\copyname{Copie}%
-\defcaptionname{spanish,italian}\copyname{Copia}%
-\defcaptionname{polish}\copyname{Kopia}%
+  swissgerman,nswissgerman}\copyname{Kopie}
+\defcaptionname{acadian,canadien,francais,french}\copyname{Copie}
+\defcaptionname{spanish,italian,portugese}\copyname{Copia}
+\defcaptionname{polish}\copyname{Kopia}
+\defcaptionname{russian}\copyname{Копия}
 
 \endinput
