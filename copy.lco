@@ -28,6 +28,8 @@
     \@latex@info@no@line{Shipout an empty page}%
     \AtBeginShipoutOriginalShipout\null
   \fi\fi
+  \immediate\closeout\@mainaux
+  \immediate\openout\@mainaux\jobname.aux
   \begingroup
     \c@page=\z@
     \loop\ifnum\c@page<\c@copy@pages
