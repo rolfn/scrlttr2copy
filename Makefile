@@ -3,21 +3,21 @@
 
 .SUFFIXES : .tex .ltx .dvi .ps .pdf .eps
 
-MAIN = letter-copy
+MAIN = scrlttr2copy
 
 VERSION = $(shell awk '/ProvidesFile/ {print $$2}' copy.lco)
 
 DIST_DIR = $(MAIN)
 
-DIST_FILES = copy.lco README.md $(MAIN)-test.tex $(MAIN)-test.pdf
+DIST_FILES = copy.lco README.md letter-copy-test.tex letter-copy-test.pdf
 
 LATEX = pdflatex
 
 ARCHNAME = $(MAIN)-$(VERSION).zip
 
-all : $(MAIN)-test.pdf
+all : letter-copy-test.pdf
 
-$(MAIN)-test.pdf : $(MAIN)-test.tex copy.lco
+letter-copy-test.pdf : letter-copy-test.tex copy.lco
 	$(LATEX) $<
 	$(LATEX) $<
 
@@ -26,10 +26,10 @@ debug :
 	@echo ">"$(ARCHNAME)"<"
 
 clean :
-	$(RM) $(addprefix $(MAIN)-test, .log .aux .bbl .blg)
+	$(RM) $(addprefix letter-copy-test, .log .aux .bbl .blg)
 
 veryclean : clean
-	$(RM) $(MAIN)-test.pdf $(ARCHNAME)
+	$(RM) letter-copy-test.pdf $(ARCHNAME)
 
 dist : all
 	mkdir -p $(DIST_DIR)
