@@ -7,11 +7,9 @@ MAIN = letter-copy
 
 VERSION = $(shell awk '/ProvidesFile/ {print $$2}' copy.lco)
 
-DIST_DIR1 = $(MAIN)
-DIST_DIR2 = $(MAIN)/doc
+DIST_DIR = $(MAIN)
 
-DIST_FILES1 = copy.lco
-DIST_FILES2 = README.md $(MAIN)-test.pdf result-picture.pdf
+DIST_FILES = copy.lco README.md $(MAIN)-test.tex $(MAIN)-test.pdf
 
 LATEX = pdflatex
 
@@ -34,12 +32,10 @@ veryclean : clean
 	$(RM) $(MAIN)-test.pdf $(ARCHNAME)
 
 dist : all
-	mkdir -p $(DIST_DIR1)
-	mkdir -p $(DIST_DIR2)
-	cp -p $(DIST_FILES1) $(DIST_DIR1)
-	cp -p $(DIST_FILES2) $(DIST_DIR2)
+	mkdir -p $(DIST_DIR)
+	cp -p $(DIST_FILES) $(DIST_DIR)
 	rm -f $(ARCHNAME)
-	zip $(ARCHNAME) -r $(DIST_DIR1)
-	rm -rf $(DIST_DIR1)
+	zip $(ARCHNAME) -r $(DIST_DIR)
+	rm -rf $(DIST_DIR)
 
 
