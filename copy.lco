@@ -12,8 +12,7 @@
 %%
 %% This work has the LPPL maintenance status "author-maintained".
 
-\ProvidesFile{copy.lco}[%
-  2015/05/31 v0.1d copy letter-class-option (RN)]
+\ProvidesFile{copy.lco}[2015/05/31 v0.1d copy letter-class-option (RN)]
 
 \RequirePackage{atbegshi,picture,xcolor,graphicx}
 \RequirePackage{etex}
