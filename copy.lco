@@ -1,5 +1,5 @@
 
-%% Copyright (C) 2015
+%% Copyright (C) 2015-2020
 %% Rolf Niepraschk, Rolf.Niepraschk@gmx.de
 %%
 %% This work may be distributed and/or modified under the
@@ -12,45 +12,59 @@
 %%
 %% This work has the LPPL maintenance status "author-maintained".
 
-\ProvidesFile{copy.lco}[2015/05/31 v0.1d copy letter-class-option (RN)]
+\ProvidesFile{copy.lco}[2020/10/20 v0.2a copy letter-class-option (RN)]
+\providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
+\IfFormatAtLeastTF{2020/10/01}{}{%
+  \PackageError{copy.lco}{%
+    LaTeX version equal to or newer \MessageBreak
+    than '2020/10/01' is required%
+  }{%
+    Renew your TeX installation.%
+  }%
+}
 
-\RequirePackage{atbegshi,picture,xcolor,graphicx}
-\RequirePackage{etex}
+\RequirePackage{xcolor,graphicx}
 
 \newcounter{copy@pages}
 
-\AtBeginLetter{\shipout@copy}
-\AtEndDocument{\shipout@copy}
+\AtBeginLetter{\shipout@copy}% Output the copy of the pages of the previous letter
+\AtEndDocument{\shipout@copy}% Output the copy of the pages of the last letter
 
 \newcommand*\shipout@copy{%
-  \if@twoside\ifodd\c@copy@pages
-    \@latex@info@no@line{Shipout an empty page}%
-    \AtBeginShipoutOriginalShipout\null
-  \fi\fi
-  \immediate\closeout\@mainaux
-  \immediate\openout\@mainaux\jobname.aux
-  \begingroup
-    \c@page=\z@
-    \loop\ifnum\c@page<\c@copy@pages
-      \advance\c@page\@ne
-      \@latex@info@no@line{Shipout copy of page \the\c@page}%
-      \setbox\AtBeginShipoutBox=\box\csname out@box\the\c@page\endcsname
-      \AtBeginShipoutUpperLeft{\LetterCopyMarker}%
-      \AtBeginShipoutOriginalShipout\box\AtBeginShipoutBox
-    \repeat
-  \endgroup
-  \c@copy@pages=\z@
+  \ifnum\c@copy@pages>\z@% ignore the following in the first \AtBeginLetter     
+    \RemoveFromHook{shipout/before}[CP@save]
+    \if@twoside\ifodd\c@copy@pages
+      \@latex@info@no@line{Shipout an empty page}%
+      \shipout\null
+    \fi\fi
+    \immediate\closeout\@mainaux
+    \immediate\openout\@mainaux\jobname.aux
+    \begingroup
+      \c@page=\z@
+      \AddToHook{shipout/background}[CP@marker]{\LetterCopyMarker}%
+      \loop\ifnum\c@page<\c@copy@pages
+        \advance\c@page\@ne
+        \@latex@info@no@line{Shipout copy of page \the\c@page}%
+        \setbox\ShipoutBox=\box\csname out@box\the\c@page\endcsname
+        \shipout\box\ShipoutBox
+      \repeat
+      \RemoveFromHook{shipout/background}[CP@marker]
+    \endgroup
+    \c@copy@pages=\z@
+  \fi
+  % Saving all pages of the next letter 
+  \AddToHook{shipout/before}[CP@save]{\save@page@copies}
 }
 
-\AtBeginShipout{%
+\newcommand*\save@page@copies{%
   \@ifundefined{out@box\the\c@page}{%
     \@latex@info@no@line{Alloc savebox for page \the\c@page}%
     \expandafter\newsavebox\csname out@box\the\c@page\endcsname
   }{%
     \@latex@info@no@line{Savebox for page \the\c@page\space already exist}%
   }%
-  \@latex@info@no@line{Save page \the\c@page}%
-  \global\setbox\csname out@box\the\c@page\endcsname=\copy\AtBeginShipoutBox
+  \@latex@info@no@line{Save page \the\c@page\space to \string\out@box\the\c@page}%
+  \global\setbox\csname out@box\the\c@page\endcsname=\copy\ShipoutBox
   \global\c@copy@pages=\c@page
 }
 

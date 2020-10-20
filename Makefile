@@ -1,5 +1,5 @@
 
-# Rolf Niepraschk, 2016-02-13, Rolf.Niepraschk@gmx.de
+# Rolf Niepraschk, 2020-10-20, Rolf.Niepraschk@gmx.de
 
 .SUFFIXES : .tex .ltx .dvi .ps .pdf .eps
 
@@ -9,7 +9,7 @@ VERSION = $(shell awk '/ProvidesFile/ {print $$2}' copy.lco)
 
 DIST_DIR = $(MAIN)
 
-DIST_FILES = copy.lco README.md letter-copy-test.tex letter-copy-test.pdf
+DIST_FILES = copy.lco README.md letter-copy-test.tex 
 
 LATEX = pdflatex
 
