@@ -26,10 +26,10 @@
 \RequirePackage{xcolor,graphicx}
 
 \AtEndLetter{% Saving the number of total pages of each letter in a separate macro
-  \expandafter\xdef\csname CP@max@pages@\the\c@letter\endcsname{\the\c@page}%
+  \expandafter\xdef\csname CP@total@pages@\the\c@letter\endcsname{\the\c@page}%
 }
 
-\newcommand*\save@page@copies{% Saving each output page in a separate box
+\newcommand*\CP@save@page{% Saving each output page in a separate box
   \expandafter\newsavebox\csname page@box@\the\c@letter @\the\c@page\endcsname
   \@latex@info@no@line{Save page \the\c@page\space of  letter \the\c@letter 
     \space to \string\page@box@\the\c@letter @\the\c@page}%
@@ -37,7 +37,7 @@
     \copy\ShipoutBox
 }
 
-\AddToHook{shipout/before}[CP@save]{\save@page@copies}
+\AddToHook{shipout/before}[CP@save]{\CP@save@page}
 
 \newcommand*\LetterCopyMarker{%
   \put(0.5\paperwidth,-0.5\paperheight){%
@@ -46,7 +46,7 @@
   }%
 }
 
-\AddToHook{enddocument/afteraux}[CP@shipout]{%
+\AddToHook{enddocument/afteraux}[CP@output]{%
   \RemoveFromHook{shipout/before}[CP@save]%
   \if@twoside\ifodd\ReadonlyShipoutCounter
     \@latex@info@no@line{Output an empty page}%
@@ -58,7 +58,7 @@
     \advance\@tempcnta\@ne
     {%
       \c@page=\z@
-      \edef\@tempa{\@nameuse{CP@max@pages@\the\@tempcnta}}% total pages
+      \edef\@tempa{\@nameuse{CP@total@pages@\the\@tempcnta}}% total pages
       \loop% iterate over all pages of this letter
         \advance\c@page\@ne
         \@latex@info@no@line{Output of the copy of page \the\c@page\space 
@@ -70,15 +70,15 @@
     }%
   \ifnum \@tempcnta < \c@letter
   \repeat
-  \RemoveFromHook{shipout/background}[CP@marker]
-  \RemoveFromHook{enddocument/afteraux}[CP@shipout]
+  \RemoveFromHook{shipout/background}[CP@marker]%
+  \RemoveFromHook{enddocument/afteraux}[CP@output]%
 }
 
 \newkomavar[\copyname]{copy}
 \newcommand*\copyname{Copy}
 
 \defcaptionname{american,australian,british,canadian,%
-  english,newzealand,UKenglish,USenglish}\copyname{Copy}%
+  english,newzealand,UKenglish,USenglish}\copyname{Copy}
 \defcaptionname{german,ngerman,austrian,naustrian,%
   swissgerman,nswissgerman}\copyname{Kopie}
 \defcaptionname{acadian,francais,french}\copyname{Copie}
