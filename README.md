@@ -11,6 +11,6 @@ This work may be distributed and/or modified under the conditions of the LaTeX
 Project Public License, either version 1.3 of this license or (at your option) 
 any later version.
 
-Rolf Niepraschk, 2020-10-20
+Rolf Niepraschk
 
 

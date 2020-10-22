@@ -25,7 +25,7 @@
 
 \RequirePackage{xcolor,graphicx}
 
-\AtEndLetter{% Saving the total pages of each letter in a separate macro
+\AtEndLetter{% Saving the number of total pages of each letter in a separate macro
   \expandafter\xdef\csname CP@max@pages@\the\c@letter\endcsname{\the\c@page}%
 }
 
