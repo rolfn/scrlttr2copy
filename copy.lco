@@ -64,8 +64,7 @@
         \advance\c@page\@ne
         \@latex@info@no@line{Output of the copy of page \the\c@page\space 
           of letter \the\@tempcnta}%
-        \setbox\ShipoutBox=\box\@nameuse{page@box@\the\@tempcnta @\the\c@page}%
-        \shipout\box\ShipoutBox
+        \shipout\box\@nameuse{page@box@\the\@tempcnta @\the\c@page}%
       \ifnum \c@page < \@tempa
       \repeat
     }%
