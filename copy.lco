@@ -12,7 +12,7 @@
 %%
 %% This work has the LPPL maintenance status "author-maintained".
 
-\ProvidesFile{copy.lco}[2020/10/22 v0.3a copy letter-class-option (RN)]
+\ProvidesFile{copy.lco}[2020/10/24 v0.3b copy letter-class-option (RN)]
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
 \IfFormatAtLeastTF{2020/10/01}{}{%
   \PackageError{copy.lco}{%
@@ -46,8 +46,9 @@
   }%
 }
 
+\AddToHook{enddocument}{\RemoveFromHook{shipout/before}[CP@save]} 
+
 \AddToHook{enddocument/afteraux}[CP@output]{%
-  \RemoveFromHook{shipout/before}[CP@save]%
   \if@twoside\ifodd\ReadonlyShipoutCounter
     \@latex@info@no@line{Output an empty page}%
     \shipout\null
