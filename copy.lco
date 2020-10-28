@@ -12,7 +12,7 @@
 %%
 %% This work has the LPPL maintenance status "author-maintained".
 
-\ProvidesFile{copy.lco}[2020/10/24 v0.3b copy letter-class-option (RN)]
+\ProvidesFile{copy.lco}[2020/10/28 v0.3c copy letter-class-option (RN)]
 \providecommand\IfFormatAtLeastTF{\@ifl@t@r\fmtversion}
 \IfFormatAtLeastTF{2020/10/01}{}{%
   \PackageError{copy.lco}{%
@@ -71,7 +71,6 @@
   \ifnum \@tempcnta < \c@letter
   \repeat
   \RemoveFromHook{shipout/background}[CP@marker]%
-  \RemoveFromHook{enddocument/afteraux}[CP@output]%
 }
 
 \newkomavar[\copyname]{copy}
